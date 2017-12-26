@@ -1,4 +1,4 @@
-# SWBFSpy Internet Master Server
+# SWBFSpy Internet Master Server for Star Wars Battlefront
 
 Project by the SWBFModders community to rebuild the GameSpy master server software used to host game servers for Star Wars Battlefront (2004) and Star Wars Battlefront II (2005) on the PC, PS2, and XBOX. 
 SWBFSpy is based on OpenSpy source codes. All the original GameSpy features such as Leaderboards are being added, in addition to several brand new features. 
