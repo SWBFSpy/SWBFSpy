@@ -1,0 +1,92 @@
+[FC]Wolf posted a swbfspy thread on the private [FC] forum 11 days before swbfkiller tried to plagiarize our project after snooping through our private messages and discovering we had thought of the name SWBFSpy first. A sequence of events then played out as described on www.SWBFModders.com which caused us to ban the plagiarists for trying to steal our project from us. These are the initial notes [FC]Wolf posted on December 2nd 2013, about 3 months after we first came up with the idea of replacing the Gamespy Master Server for Star Wars Battlefront. 
+
+Even before this, on November 16, 2013 [FC]Wolf posted a guide on how to compile OpenSpy, and on the 27th a list of gamespy protocols. These are included here too for future reference. The SWBFSpy Whitelist is finished as of 2017.
+
+------------------------------------------------------------------------------------
+
+[FC]Wolf
+what gamespy protocols do
+« on: November 27, 2013, 11:26:27 PM »
+natneg1.gamespy.com: forwards ports for pc's behind routers, it is also currently where bug is that if you quit a server it takes ~15 mins to make it dissappear/reset stats
+swbfrontpc.ms4.gamespy.com*: responsible for reading the server list of gamespy master server also probably where the joining bug lies
+swbfrontpc.master.gamespy.com*: communication with the master server, if this service is working your server should stay up in a internet game
+peerchat.gamespy.com: ment for lobby chat but not used in swbf so no need for it.
+key.gamespy.com : checks for authentic cd keys and makes sure no more than one copy is in use, edit: this is used by swbf and appears to be one of the bugs that keeps players from joining a server
+motd.gamespy.com: since gamespy sold out to glue there is no need for a message of the day. wasnt even used by most swbf players lol
+gpsp.gamespy.com: gamer profile search, probably not used by anyone
+gpcm.gamespy.com: gamer profile manager, you know that annoying do you want to login to gamespy message, this is to manage that account probably never used.
+swbfront.gamestats.gamespy.com : stats manager, used for leaderboards
+sdkdev.gamespy.com: developmental stat manager
+
+------------------------------------------------------------------------------------
+
+[FC]Wolf
+SWBFSpy
+« on: December 02, 2013, 01:56:19 AM »
+
+203.184.50.33 swbfrontpc.master.gamespy.com //heartbeat for to-from masterserver, needed to keep a server up
+203.184.50.33 key.gamespy.com //cdkey auth
+203.184.50.33 natneg1.gamespy.com  //not really too important just port forwards
+
+server lobby(swbfrontpc.ms4.gamespy.com)-functional, it does it's job near flawlessly with exception of hang on loading the lobby which the solution is to click cancel(other bugs are due to other pieces of the program).
+
+natneg(natneg1.gamespy.com/natneg2.gamespy.com)-there is some issues here that i might be able to make a work around but until then i don't think i will be making this functional so i will be pulling from program for time being called by main program, this means it will be necessary to port forward manually. i will specify what ports and possibly write a tut on this at a later time. main problems with it atm are 1. stops servers from updating right,  2. might be responsible for when openspy worked why you can join if you join, quit, join, 3. is a possibility it is partially responible for the fact that players can't join servers that show stats
+
+cdkey check(key.gamespy.com)-is functional, i think i have a means to make it so it can skip the cd check and/or use it to only allow certain cd key hashes(unique to each cd key) if the check doesn't approve your cd hash then you cant connect and receive a invalid cdkey warning. ps2 version doesnt have a cdkey check to deal with. the fault in the auth packet is clear as day(not sure what in the code is causing it yet) since i have copies of both successful packet captures, successful connect and bad one's, in theory atm i can fake with the packet data i have and join another player's server per se on openspy. but this is not a very effective strategy as it has to be done for each player on their own computer(except host for some reason the host's packet is correct) and leaves a lot of room for errors and headaches.
+
+motd(motd.gamespy.com)-functional, not needed but since the code works no need to remove can update motd to say some funny things like jan 4: fc still owns
+
+profile/gamestats tracker(gpsp.gamespy.com,gpcm.gamespy.com,swbfront.gamestats.gamespy.com)-functional, needs a front end to display stats but is easy to make and has no impact on getting the master running so low priority atm.
+
+master(swbfrontpc.master.gamespy.com)-semi functional, can get servers to stay up, can get it to transmit all the needed data to the lobby, can even join on a local area connection. problem is if one thing messes up anywhere on the line chances are it will fail, also possible it contains part of the reason for dc not working.
+
+geoip-seems to be functional, if becomes enough of a nuisance will remove though
+
+mysql database-functional, found out when i had my uncle look at it he rebuilt it for me(wasnt included by default) but doesn't have enough interest/time to debug all the problems in the program just rebuilt the sql database which i will include when i do re upload the whole program hopefully when it is fully functional.
+
+------------------------------------------------------------------------------------
+
+[FC]Wolf
+openspy, how to compile it and set up all the necessary things to run it
+« on: November 16, 2013, 06:11:39 PM »
+
+i'll ul the needed files here(later) and am taking notes as i go along, 
+so far the list is:
+linux
+
+1. openspy core-https://github.com/sfcspanky/Openspy-Core
+
+2. mysql(open terminal and type :
+    apt-get install mysql-client
+    apt-get install mysql-server)
+
+3. geoip(shows location of ppl connected to server can be removed by editing the source)
+
+4.gcc/g++(95% of Luigi's projects can be compiled using these, note luigi is actually someone who you can ask something and get a response most of the time, basically he is like the fred of debugging/gamespy emulators, in fact most emulation software for gamespy master servers has at least a few pieces of his code)
+
+5. a understanding of c code and a lil knowledge of mysql
+
+how to:
+open terminal and go to your openspy project folder with the makefile in it(e.g. cd /root/desktop/master/) then type make in terminal. if you encounter errors let me know and i can set you down right path. if you did everything right you should successfully compile.
+Windows
+
+method 1
+install minigw and see the steps/methods in linux process
+
+method 2
+1. openspy core-https://github.com/sfcspanky/Openspy-Core
+
+2. mysql-http://www.mysql.com/
+
+3. visual studio 2010 sp1
+
+4. knowledge of c/c++(you will likely get stuck telling the compiler where everything is
+
+5. there was a few things i had to add to get it to compile but i forgot off the top of my head so i will add later
+
+how to:*has a winsock bug that has to be fixed from main files
+will write at later time
+
+actually the way gamespy/ all other emulators work is via ip's, to describe how the main system works you have server being hosted on user's pc, in gamespy 2 it needs a handshake packet to establish a connection even dc(basically it is the master and the server acknowledging each other think of it as a pw to get into the site and add your info) :-\.  from here once connection is established a packet update info is sent to the master every 5 seconds(basically updates the info in the database on a regular basis) think of it as a site tells the addresses of friends you want to play with, now for the client, the client only communicates with the master when in server lobby(with exception of cdkey auth),think of the server lobby as a front end(a phone, computer etc) to access the list of friends addresses, it reads of the site the address(ip address) of all your friends that have a address on the site so you can go over and play in their house(server) from there the players server takes over and handles most of the work, it sends updates on who is at the friends house and sends it back to the master which then can be viewed by other friends. that being said it is possible to make it deny a nice range of addresses so it denies authentication to unauthorized use, basically like in previous example no pw they cant get in(yes there is ways around this but since they are too dumb to get master running there is no way at all they have intelligence to wiggle in some exploits to fake authenticate their server let alone join ours)i can enable ip logging no prob to make sure it stays secure.
+
+mysql not needed by essential files, what the sql database is for is stat tracking and profiles (the login to gamespy thingy). so in other words the mysql database actually is not important at all as far as getting main project running, i will likely first make a light weight build that only serves as a master server then continue to finish debugging the rest. the two ports that need to be open are 27900 and 29910. i will be debugging code and hopefully have functional master(think i will like today soon) with white list(might take a while to get to work perfect) next week
