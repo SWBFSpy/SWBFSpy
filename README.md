@@ -9,4 +9,10 @@ SWBFSpy is based on OpenSpy source codes. All the original GameSpy features such
 
 The official SWBFSpy website is http://info.SWBFSpy.org
 
-I'll update this again soon. 
+More tools and info will be posted here soon.
+
+If you want to host a SWBFSpy dedicated server:
+
+    Download dedicated server files from http://www.swbfmodders.com
+    Download multiplayer server binaries from http://info.swbfspy.org/
+    Replace the server executable with the one downloaded from swbfspy
