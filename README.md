@@ -5,9 +5,9 @@ SWBFSpy is a project started by the SWBFModders community to rebuild the GameSpy
 
 SWBFSpy is based on OpenSpy source codes. All the original GameSpy features such as Leaderboards are being added, in addition to several brand new features. The administrators and developers of SWBFSpy include [FC]Phobos and [FC]Wolf, who founded the SWBFSpy project in September 2013. [FC]Wolf created the initial prototype files, but went inactive during 2014. Since then, [FC]Phobos has been the sole admin of SWBFSpy.
 
-Some of our source code can't be shared on GitHub due to hostility from jealous trolls who were never involved in the creation or administration of SWBFSpy. Don't be fooled by their lies and fake websites. Shortly after they saw the SWBFSpy shell .TGA files that Phobos posted in 2016, they tried (and failed) to publicly plagiarize SWBFSpy from him and lock him out of his own creations, so eventually (after refusing more diplomatic solutions) they were banned from the community as a result.
+What resources we are able to share here, others should find useful for adapting OpenSpy source to support multiplayer master servers for games other than Star Wars Battlefront, although SWBFSpy currently has no plans to support other games at this time. Let us know if you would like to help us add support for any other games!
 
-What resources we are able to share here, others should find useful for adapting OpenSpy source to support multiplayer master servers for games other than Star Wars Battlefront, although SWBFSpy currently has no plans to support other games at this time.
+Some of our source code can't be shared on GitHub due to hostility from jealous trolls who were never involved in the creation or administration of SWBFSpy. Don't be fooled by their lies and fake websites. Shortly after they saw the SWBFSpy shell .TGA files that Phobos posted in 2016, they unsucessfully tried to publicly plagiarize SWBFSpy from him and lock him out of his own creations, so eventually (after refusing more diplomatic solutions) they were banned from the community as a result. We've since had to implement a Whitelist Firewall to keep out those trolls and other server crashers.
 
 Phobos is the Administrator, and Founder, and Chief Executive Officer of our SWBFSpy Organization. You can learn more at the official SWBFSpy info website here: http://info.SWBFSpy.org
 
